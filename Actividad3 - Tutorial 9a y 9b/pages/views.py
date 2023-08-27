@@ -6,7 +6,8 @@ from django import forms
 from django.urls import reverse
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Product
-from .apps import PagesConfig
+from .utils import ImageLocalStorage
+from django.core.exceptions import ValidationError 
 
 
 class ImageViewNoDI(View):
@@ -18,11 +19,12 @@ class ImageViewNoDI(View):
         return render(request, self.template_name, {'image_url': image_url})
 
     def post(self, request):
-        image_storage = PagesConfig.ImageLocalStorage()
+        image_storage = ImageLocalStorage()
         image_url = image_storage.store(request)
         request.session['image_url'] = image_url
 
         return redirect('image_index')
+    
 
 
 def ImageViewFactory(image_storage):

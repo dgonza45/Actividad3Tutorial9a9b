@@ -12,11 +12,8 @@ urlpatterns = [
      path('cart/', CartView.as_view(), name='cart_index'),
      path('cart/add/<str:product_id>', CartView.as_view(), name='cart_add'),
      path('image/', ImageViewFactory(ImageLocalStorage()).as_view(), name='image_index'),
-     path('image_save', ImageViewFactory(ImageLocalStorage()).as_view(), name='image_save'),
-     path('imagenotdi/', ImageViewNoDI.as_view(), name='imagenotdi_index'),
-     path('image/save', ImageViewNoDI.as_view(), name='imagenotdi_save'),
-
-
-
+     path('image/save', ImageViewFactory(ImageLocalStorage()).as_view(), name='imagesave'),
+     path('imagenotdi/', ImageViewNoDI.as_view(), name='imagenodi_index'),
+     path('image/save', ImageViewNoDI.as_view(), name='imagenodi_save'),
 
      ]
